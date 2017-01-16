@@ -4,7 +4,20 @@
 @include flex-setting(column);
 @include flex-align-setting();
 
+// mobile
 @media all and (min-width:768px){
-  @include flex-setting(row, xs);
-  @include flex-setting(column, xs);
+  @include flex-setting(row, md);
+  @include flex-setting(column, md);
+}
+
+// tablet
+@media all and (min-width:768px) and (max-width:1024px) {
+  @include flex-setting(row, td);
+  @include flex-setting(column, td);
+}
+
+// desktop
+@media all and (min-width:1025px) {
+  @include flex-setting(row, dd);
+  @include flex-setting(column, dd);
 }
