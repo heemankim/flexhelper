@@ -1,0 +1,94 @@
+/**
+    flex value setting
+      @param
+        $direction - flex layout direction [row | column]
+        $max       - loop max
+        $step      - loop step
+        $lastfix   - media query lastfix [nil | xs | ms]
+ */
+@mixin flex-loop($direction, $max, $step, $lastfix) {
+  @for $i from 1 through ($max / $step){
+    $value: $step * $i;
+    @if $lastfix == nil{
+      $name: '';
+    }@else {
+      $name: -#{$lastfix};
+    }
+    .flex-#{$value}#{$name} {
+      flex: 1 1 #{$value}%;
+      @if $direction == row {
+        max-width: #{$value}%;
+        max-height: 100%;
+      } @else {
+        max-width: 100%;
+        max-height: #{$value}%;
+      }
+    }
+  }
+}
+
+/**
+    flex container setting with flex value
+      @param
+        $direction - flex layout direction [row | column]
+        $lastfix   - media query lastfix [default: nil, nil | xs| ms]
+ */
+@mixin flex-setting ($direction, $lastfix: nil){
+  @if $lastfix == nil {
+    $name: '';
+  }@else {
+    $name: -#{$lastfix};
+  }
+  .flex-container-#{$direction}#{$name} {
+    display: flex;
+    flex-direction: #{$direction};
+    @include flex-loop($direction, 100, 5, $lastfix);
+    @include flex-loop($direction, 66, 33, $lastfix);
+  }
+}
+
+/**
+    flex-align Setting
+      .flex-container-center-center-xs  미디어쿼리 접미사가 붙는다.
+ */
+@mixin flex-align-setting($lastfix: nil){
+  $inputAlignsOne: ("start" "center" "end" "space-around" "space-between");
+  $inputAlignsTwo: ("start" "center" "end" "stretch");
+  $flexAlignMap: (
+          start: flex-start,
+          center:center,
+          end: flex-end,
+          space-around: space-around,
+          space-between: space-between,
+          stretch: stretch
+  );
+
+  @if $lastfix == nil {
+    $name: '';
+  }@else {
+    $name: -#{$lastfix};
+  }
+
+  @each $justy in $inputAlignsOne {
+
+    @each $align in $inputAlignsTwo {
+
+      .flex-container-align-#{$justy}-#{$align}#{$name} {
+
+        // 값추출
+        $justifyValue: #{map-get($flexAlignMap, $justy)};
+        $alignValue: #{map-get($flexAlignMap, $align)};
+
+        -webkit-justify-content: #{$justifyValue};
+        justify-content: #{$justifyValue};
+        -webkit-align-items: #{$alignValue};
+        align-items: #{$alignValue};
+
+      }
+
+    }
+
+  }
+}
+// mixin 종료
+

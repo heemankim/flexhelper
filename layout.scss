@@ -1,0 +1,10 @@
+@import "layout_mixin";
+
+@include flex-setting(row);
+@include flex-setting(column);
+@include flex-align-setting();
+
+@media all and (min-width:768px){
+  @include flex-setting(row, xs);
+  @include flex-setting(column, xs);
+}
