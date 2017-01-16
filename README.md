@@ -14,10 +14,10 @@
 
 지원가능 클레스 : flex-container-row, flex-container-column, flex-XX
 
-접두사 목록 
+ 접두사 목록 
 
- md (mobile device) - width < 768px
+  - md (mobile device) - width < 768px
  
- td (tablet device) - width >= 768px and width <=1024px
+  - td (tablet device) - width >= 768px and width <=1024px
  
- dd (desktop device) - width >= 1025px
+  - dd (desktop device) - width >= 1025px
